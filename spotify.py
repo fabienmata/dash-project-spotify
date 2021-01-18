@@ -3,7 +3,7 @@ import json
 import spotipy 
 from spotipy.oauth2 import SpotifyClientCredentials
 
-# project's credentials obtained in spotify's developer dashboard
+# project's credentials obtained in spotify's developer dashboard 
 cid = "ff018bf33fe84021af42bd7e948e4ce2"
 secret =  "b92ead7be9894651aeb674f3496427b8"
 
@@ -19,9 +19,11 @@ def analyze_playlist(creator, playlist_id):
 
     playlist_df = pd.DataFrame(columns = playlist_features_list)
 
+#song list of the wished playlist (gets concatenated in a list of 100 by spotify if called)
     my_songs = sp.user_playlist_tracks(creator, playlist_id)
 
 #function to obtain all the songs instead of just 100 (which is the default)
+#inspired from  : https://github.com/plamere/spotipy/issues/322
     def get_all_the_songs_in_the_playlist(tracks):
         playlist = tracks["items"]
         while tracks['next']:
@@ -38,7 +40,7 @@ def analyze_playlist(creator, playlist_id):
         playlist_features["track_name"] = track["track"]["name"]
         playlist_features["track_id"] = track["track"]["id"]
 
-#get the genres of the artist      
+#get the genres of the artist (we need to call artist object)   
         artist_id = track['track']['album']['artists'][0]['id']
         artist = sp.artist(artist_id)
         playlist_features["genres"] = ', '.join(artist['genres'][:3])
