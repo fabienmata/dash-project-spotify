@@ -1,11 +1,12 @@
+#inspired by https://github.com/juandes/spotify-audio-features-data-experiment/blob/master/get_data.py
 import pandas as pd 
 import json
 import spotipy 
 from spotipy.oauth2 import SpotifyClientCredentials
 
 # project's credentials obtained in spotify's developer dashboard 
-cid = "ff018bf33fe84021af42bd7e948e4ce2"
-secret =  "b92ead7be9894651aeb674f3496427b8"
+cid = "your client_id"
+secret =  "secret code for your project"
 
 # as spotify want us to use the credential each time we call a request, the call in a simpler way : 
 client_credentials_manager = SpotifyClientCredentials(client_id=cid, client_secret=secret)
